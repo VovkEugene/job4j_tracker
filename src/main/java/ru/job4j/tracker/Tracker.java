@@ -11,16 +11,25 @@ public class Tracker {
     private int ids = 1;
     private int size = 0;
 
+    /**
+     * Добавление заявки
+     */
     public Item add(Item item) {
         item.setId(ids++);
         items[size++] = item;
         return item;
     }
 
+    /**
+     * Вывод всех заявок
+     */
     public Item[] findAll() {
         return Arrays.copyOf(items, size);
     }
 
+    /**
+     * Вывод заявки по id
+     */
     public Item findById(int id) {
         int index = indexOf(id);
         if (index == -1) {
@@ -29,6 +38,9 @@ public class Tracker {
         return items[index];
     }
 
+    /**
+     * Вывод заявок по имени
+     */
     public Item[] findByName(String key) {
         Item[] result = new Item[size];
         int counter = 0;
@@ -40,6 +52,9 @@ public class Tracker {
         return Arrays.copyOf(result, counter);
     }
 
+    /**
+     * Изменение заявки
+     */
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
         if (index == -1) {
@@ -50,6 +65,9 @@ public class Tracker {
         return true;
     }
 
+    /**
+     * Удаление заявки
+     */
     public void delete(int id) {
         int index = indexOf(id);
         if (index != -1) {
