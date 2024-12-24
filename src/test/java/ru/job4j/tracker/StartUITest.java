@@ -136,7 +136,6 @@ class StartUITest {
         assertThat(actual).isNull();
     }
 
-
     @Test
     @DisplayName("Тест проверяет, что метод выводит сообщение об ошибке, если заявка не найдена.")
     void whenReplaceItemNotFound() throws InterruptedException {
