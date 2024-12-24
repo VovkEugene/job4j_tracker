@@ -12,12 +12,10 @@ public class FileStore implements Store {
 
     @Override
     public void save(String data) {
-        //Тут реализация хранения данных в файле
     }
 
     @Override
     public String read() {
-        // Тут чтение файла
         return null;
     }
 }
