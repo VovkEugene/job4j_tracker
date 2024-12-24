@@ -10,12 +10,14 @@ import ru.job4j.tracker.action.ReplaceAction;
 import ru.job4j.tracker.action.UserAction;
 import ru.job4j.tracker.input.ConsoleInput;
 import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.input.ValidateInput;
 import ru.job4j.tracker.output.ConsoleOutput;
 import ru.job4j.tracker.output.Output;
 
+import static ru.job4j.tracker.action.UserAction.RED;
+import static ru.job4j.tracker.action.UserAction.RESET;
+
 public class StartUI {
-    private static final String MESSAGE_ERROR =
-            "\n\tНужно ввести число от 0 до 6, что соответствует операциям в меню. ";
     private final Output output;
 
     public StartUI(Output output) {
@@ -29,15 +31,17 @@ public class StartUI {
     public void init(Input input, Tracker tracker, UserAction[] actions) throws InterruptedException {
         boolean run = true;
         while (run) {
-            try {
-                showMenu(actions);
-                int select = input.askInt("Выбрать: ");
-                UserAction action = actions[select];
-                run = action.execute(input, tracker);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-                System.err.println(MESSAGE_ERROR + exception.getMessage());
+            showMenu(actions);
+            int select = input.askInt("Выбрать: ");
+            if (select < 0 || select >= actions.length) {
+                output.println(
+                        RED + "\n\tНеверный ввод, вы можете выбрать: от 0 до " + (actions.length - 1) + RESET);
                 Thread.sleep(1000);
+                continue;
             }
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
+
         }
     }
 
@@ -55,9 +59,9 @@ public class StartUI {
      * Метод запускает наше приложение
      */
     public static void main(String[] args) throws InterruptedException {
-        Input input = new ConsoleInput();
-        Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
+        Input input = new ValidateInput(new ConsoleInput(), output);
+        Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(output),
                 new FindAllAction(output),

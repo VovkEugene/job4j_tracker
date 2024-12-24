@@ -20,6 +20,7 @@ import ru.job4j.tracker.output.Output;
 import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.job4j.tracker.action.UserAction.GREEN;
+import static ru.job4j.tracker.action.UserAction.RED;
 import static ru.job4j.tracker.action.UserAction.RESET;
 
 class StartUITest {
@@ -237,6 +238,22 @@ class StartUITest {
         new StartUI(output).init(input, tracker, actions);
         assertThat(output.toString()).isEqualTo(
                 "\nМеню:" + lineSeparator()
+                        + "0. Завершить программу" + lineSeparator()
+                        + "\n=== Завершение программы ===" + lineSeparator());
+    }
+
+    @Test
+    @DisplayName("Тест проверяет, что пользователь вводит сначала несуществующий пункт, а потом верный.")
+    void whenInvalidExit() throws InterruptedException {
+        output = new MockOutput();
+        input = new MockInput(new String[]{"1", "0"});
+        UserAction[] actions = {new ExitAction(output)};
+        new StartUI(output).init(input, tracker, actions);
+        assertThat(output.toString()).isEqualTo(
+                "\nМеню:" + lineSeparator()
+                        + "0. Завершить программу" + lineSeparator()
+                        + RED + "\n\tНеверный ввод, вы можете выбрать: от 0 до 0" + RESET + lineSeparator()
+                        + "\nМеню:" + lineSeparator()
                         + "0. Завершить программу" + lineSeparator()
                         + "\n=== Завершение программы ===" + lineSeparator());
     }
