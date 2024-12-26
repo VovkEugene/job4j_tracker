@@ -7,8 +7,6 @@ public interface UserAction {
     String GREEN = "\u001B[32m";
     String RED = "\u001B[31m";
     String RESET = "\u001B[0m";
-    String MESSAGE_ERROR =
-            "Нужно ввести число от 0 до 6, что соответствует операциям в меню.";
 
     String name();
 
