@@ -3,6 +3,8 @@ package ru.job4j.tracker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrackerTest {
@@ -25,7 +27,7 @@ public class TrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item result = tracker.findAll()[0];
+        Item result = tracker.findAll().get(0);
         assertThat(result.getName()).isEqualTo(first.getName());
     }
 
@@ -37,7 +39,7 @@ public class TrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item[] actual = tracker.findAll();
+        List<Item> actual = tracker.findAll();
         assertThat(actual).containsExactly(first, second);
     }
 
@@ -52,8 +54,8 @@ public class TrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        Item[] result = tracker.findByName(first.getName());
-        assertThat(result.length).isEqualTo(3);
+        List<Item> actual = tracker.findByName(first.getName());
+        assertThat(actual.size()).isEqualTo(3);
     }
 
     @Test
@@ -67,8 +69,8 @@ public class TrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        Item[] result = tracker.findByName(second.getName());
-        assertThat(result[1].getName()).isEqualTo(second.getName());
+        List<Item> actual = tracker.findByName(second.getName());
+        assertThat(actual.get(1).getName()).isEqualTo(second.getName());
     }
 
     @Test
@@ -77,7 +79,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("bug");
         tracker.add(item);
-        Item[] actual = tracker.findAll();
+        List<Item> actual = tracker.findAll();
         assertThat(actual).containsExactly(item);
         assertThat(item.getId()).isGreaterThan(0);
     }
@@ -88,7 +90,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item first = new Item("first");
         tracker.add(first);
-        Item[] actual = tracker.findByName("second");
+        List<Item> actual = tracker.findByName("second");
         assertThat(actual).isEmpty();
     }
 
@@ -112,7 +114,7 @@ public class TrackerTest {
         tracker.add(first);
         tracker.add(second);
         tracker.add(other);
-        Item[] actual = tracker.findByName("first");
+        List<Item> actual = tracker.findByName("first");
         assertThat(actual).containsExactly(first, second);
     }
 

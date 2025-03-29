@@ -17,6 +17,8 @@ import ru.job4j.tracker.output.ConsoleOutput;
 import ru.job4j.tracker.output.MockOutput;
 import ru.job4j.tracker.output.Output;
 
+import java.util.List;
+
 import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.job4j.tracker.action.UserAction.GREEN;
@@ -46,7 +48,7 @@ class StartUITest {
         String[] answers = {"0", TASK_NAME, "1"};
         input = new MockInput(answers);
         new StartUI(output).init(input, tracker, actions);
-        Item actual = tracker.findAll()[0];
+        Item actual = tracker.findAll().get(0);
         Item expected = new Item(TASK_NAME);
         assertThat(actual.getName()).isEqualTo(expected.getName());
     }
@@ -61,7 +63,7 @@ class StartUITest {
         tracker.add(new Item(NEW_TASK_NAME));
         tracker.add(new Item(TASK_NAME));
         new StartUI(output).init(input, tracker, actions);
-        Item[] actual = tracker.findByName(TASK_NAME);
+        List<Item> actual = tracker.findByName(TASK_NAME);
         assertThat(actual).hasSize(2);
     }
 
@@ -110,7 +112,7 @@ class StartUITest {
         String[] answers = {"0", "1"};
         input = new MockInput(answers);
         new StartUI(output).init(input, tracker, actions);
-        Item[] actual = tracker.findAll();
+        List<Item> actual = tracker.findAll();
         assertThat(actual).hasSize(2);
     }
 
