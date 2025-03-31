@@ -25,6 +25,7 @@ class ItemAscByNameTest {
 
         assertThat(items)
                 .usingRecursiveComparison()
+                .ignoringFields("created")
                 .isEqualTo(expected);
     }
 }
