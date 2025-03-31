@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class ScheduleTask {
-
     private final PriorityQueue<Task> queue;
 
     public ScheduleTask(Comparator<Task> comparator) {
