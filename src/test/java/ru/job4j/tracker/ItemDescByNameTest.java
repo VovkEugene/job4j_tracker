@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ItemDescByNameTest {
 
     @Test
-    public void whenSortDescending_thenSortedCorrectly() {
+    public void whenSortDescendingThenSortedCorrectly() {
         List<Item> items = new ArrayList<>();
         items.add(new Item("Banana"));
         items.add(new Item("Apple"));

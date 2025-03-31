@@ -18,7 +18,7 @@ public class JobTest {
     }
 
     @Test
-    public void whenAscByNameThenByPriority_namesEqual_thenCompareByPriority() {
+    public void whenAscByNameThenByPriorityNamesEqualThenCompareByPriority() {
         Comparator<Job> cmp = new JobAscByName().thenComparing(new JobAscByPriority());
         Job job1 = new Job("Alpha", 1);
         Job job2 = new Job("Alpha", 2);
@@ -27,7 +27,7 @@ public class JobTest {
     }
 
     @Test
-    public void whenAscByNameThenByPriority_namesDifferent_thenCompareByName() {
+    public void whenAscByNameThenByPriorityNamesDifferentThenCompareByName() {
         Comparator<Job> cmp = new JobAscByName().thenComparing(new JobAscByPriority());
         Job job1 = new Job("Alpha", 2);
         Job job2 = new Job("Beta", 1);
@@ -36,7 +36,7 @@ public class JobTest {
     }
 
     @Test
-    public void whenDescByNameThenByPriority_namesEqual_thenCompareByPriority() {
+    public void whenDescByNameThenByPriorityNamesEqualThenCompareByPriority() {
         Comparator<Job> cmp = new JobDescByName().thenComparing(new JobDescByPriority());
         Job job1 = new Job("Alpha", 2);
         Job job2 = new Job("Alpha", 1);
@@ -45,7 +45,7 @@ public class JobTest {
     }
 
     @Test
-    public void whenDescByNameThenByPriority_namesDifferent_thenCompareByName() {
+    public void whenDescByNameThenByPriorityNamesDifferentThenCompareByName() {
         Comparator<Job> cmp = new JobDescByName().thenComparing(new JobDescByPriority());
         Job job1 = new Job("Beta", 2);
         Job job2 = new Job("Alpha", 1);
